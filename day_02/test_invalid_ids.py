@@ -1,6 +1,10 @@
 import pytest
 from invalid_ids import find_invalid_ids
 
+def test_single_range():
+    id_range = "1188511880-1188511890"
+    pass
+
 def test_find_invalid_ids():
     id_ranges = [
             "11-22", "95-115", "998-1012", "1188511880-1188511890", "222220-222224",
