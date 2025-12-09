@@ -1,7 +1,7 @@
 import re
 
-# Day 2 Part 1 SUCCESSFUL Solution
-def find_invalid_ids(id_range: str) -> list[int]:
+# Day 2 Part 2
+def find_invalid_ids_p2(id_range: str) -> list[int]:
     # Start by processing the input string into its range of numbers
     m = re.match(r"^(\d+)-(\d+)$", id_range)
     range_start = int(m.group(1))
@@ -13,7 +13,9 @@ def find_invalid_ids(id_range: str) -> list[int]:
     for num in range(range_start, range_stop):
         if str(num).startswith('0'):
             continue
-        # Match num using the index of the middle to check if it repeats
+        # Change to loop through chars at index to see if they repeat
+        # for i in str(num)
+        # if str(num)[i] in str(num)[i+1]:
         num_length = len(str(num))
         if num_length % 2 == 0: # invalid IDs always have an even length
             repeat_index = num_length // 2
@@ -30,7 +32,7 @@ def main():
     invalid_id_lst = []
     breakpoint()
     for id_range in range_lst:
-        invalid_id_lst.extend(find_invalid_ids(id_range))
+        invalid_id_lst.extend(find_invalid_ids_p2(id_range))
     print(sum(invalid_id_lst))
 
 if __name__ == "__main__":
