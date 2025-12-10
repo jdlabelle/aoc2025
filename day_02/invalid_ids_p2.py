@@ -1,6 +1,16 @@
 import re
 
-# Day 2 Part 2
+# Day 2 Part 2 SUCCESSFUL solution
+def factorize(num: int) -> list[int]:
+    """Find the factors of a number"""
+    factors = []
+    for x in range(1, num+1):
+        if num % x == 0:
+            factors.append(x)
+    # remove the number itself as invalids need to appear at least twice
+    factors.pop()
+    return factors
+
 def find_invalid_ids_p2(id_range: str) -> list[int]:
     # Start by processing the input string into its range of numbers
     m = re.match(r"^(\d+)-(\d+)$", id_range)
@@ -10,17 +20,19 @@ def find_invalid_ids_p2(id_range: str) -> list[int]:
 
     # Find the invalid ids in the range
     invalid_ids = []
+    # invalids never start with zero
     for num in range(range_start, range_stop):
         if str(num).startswith('0'):
             continue
-        # Change to loop through chars at index to see if they repeat
-        # for i in str(num)
-        # if str(num)[i] in str(num)[i+1]:
+        # An invalid sequence (amount of times a number repeats)
+        # is a factor of the length of the number
         num_length = len(str(num))
-        if num_length % 2 == 0: # invalid IDs always have an even length
-            repeat_index = num_length // 2
-            if str(num)[:repeat_index] in str(num)[repeat_index:]:
+        factors = factorize(num_length)
+        for factor in factors:
+            if str(num)[:factor] * (num_length // factor) == str(num):
                 invalid_ids.append(num)
+                # end search once an invalid is identified
+                break
 
     return invalid_ids
 
@@ -30,7 +42,6 @@ def main():
     range_lst = data.strip().split(',')
 
     invalid_id_lst = []
-    breakpoint()
     for id_range in range_lst:
         invalid_id_lst.extend(find_invalid_ids_p2(id_range))
     print(sum(invalid_id_lst))

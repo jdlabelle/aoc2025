@@ -28,7 +28,6 @@ def main():
     range_lst = data.strip().split(',')
 
     invalid_id_lst = []
-    breakpoint()
     for id_range in range_lst:
         invalid_id_lst.extend(find_invalid_ids(id_range))
     print(sum(invalid_id_lst))

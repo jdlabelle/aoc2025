@@ -1,6 +1,7 @@
 import pytest
 from invalid_ids import find_invalid_ids
 from invalid_ids_p2 import find_invalid_ids_p2
+from invalid_ids_p2 import factorize
 
 def test_single_range():
     id_range = "1188511880-1188511890"
@@ -52,3 +53,9 @@ def test_find_invalid_ids_p2():
 
     assert invalid_id_lst == expected_invalid_ids
     assert invalid_sum == expected_invalid_id_sum
+
+def test_factors():
+    num = 24
+    expected_factors = [1, 2, 3, 4, 6, 8, 12]
+
+    assert factorize(num) == expected_factors
