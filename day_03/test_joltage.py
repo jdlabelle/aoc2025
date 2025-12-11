@@ -1,6 +1,12 @@
 import pytest
 from joltage_calculator import calculate_joltage
 
+def test_single_bank():
+    bank = '10234872134087'
+    expected = '88'
+
+    assert calculate_joltage(bank) == expected
+
 def test_calculate_joltage():
     banks = [
             "987654321111111", "811111111111119", 
@@ -11,7 +17,7 @@ def test_calculate_joltage():
 
     joltages = []
     for bank in banks:
-        joltages.append(calculate_joltage(bank))
+        joltages.append(int(calculate_joltage(bank)))
 
     assert joltages == expected_joltages
     assert sum(joltages) == expected_total_joltage
