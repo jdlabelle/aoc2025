@@ -23,6 +23,12 @@ def test_calculate_joltage():
     assert joltages == expected_joltages
     assert sum(joltages) == expected_total_joltage
 
+def test_single_bank_p2():
+    bank = '234234234234278'
+    expected = '434234234278'
+
+    assert calculate_joltage_p2(bank) == expected
+
 def test_calculate_joltage_p2():
     banks = [
             "987654321111111", "811111111111119", 
