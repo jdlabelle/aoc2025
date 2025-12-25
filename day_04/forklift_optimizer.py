@@ -1,6 +1,27 @@
 # Day 4 Part 1
+
+def find_position(grid):
+    # for y_pos, row in enumerate(grid):
+    #     for x_pos, item in enumerate(row):
+    #         if item == '.':
+    #             continue
+    #         pos = (x_pos, y_pos)
+    #         print(pos)
+
+    # all rows are the same length in the grid
+    y_len = len(grid)
+    x_len = len(grid[0])
+
+    for y in range(y_len):
+        for x in range(x_len):
+            print(y,x)
+            if grid[y][x] == '@':
+                # perform_dfs(grid, y, x, visited=None)
+                pass
+
 def paper_access(position):
     pass
+
 
     # Node connections:
     # For Node `n` at position (1,1) (2nd list, 2nd item in the list)
@@ -12,10 +33,11 @@ def paper_access(position):
 
 def main():
     grid = []
-    with open('input.txt', 'r', encoding='utf-8') as f:
+    with open('test_input.txt', 'r', encoding='utf-8') as f:
         for line in f:
             grid.append(list(line.strip()))
-    print(len(grid[1]))
+    #print(len(grid[1]))
+    find_position(grid)
 
 
 if __name__ == "__main__":
