@@ -1,27 +1,59 @@
-# Day 4 Part 1
+# Day 4 Part 1 Successful Solution
 
-def find_position(grid):
-    # for y_pos, row in enumerate(grid):
-    #     for x_pos, item in enumerate(row):
-    #         if item == '.':
-    #             continue
-    #         pos = (x_pos, y_pos)
-    #         print(pos)
+def extract_paper(grid):
+    """
+    Iterate through each node in the grid to find paper and determine if 
+    accessible. If it is, increment the count and return the final result.
+    """
+    accessible_rolls = 0
 
     # all rows are the same length in the grid
-    y_len = len(grid)
-    x_len = len(grid[0])
+    y_len = len(grid)    # Row: Y-Axis
+    x_len = len(grid[0])    # Column: X-Axis
 
     for y in range(y_len):
         for x in range(x_len):
-            print(y,x)
             if grid[y][x] == '@':
-                # perform_dfs(grid, y, x, visited=None)
-                pass
+                paper_neighbors = get_neighbors(grid, y, x)
+                if paper_neighbors < 4:
+                    accessible_rolls += 1
 
-def paper_access(position):
-    pass
+    return accessible_rolls
 
+def get_neighbors(grid, row, col):
+    """Find the number of neighboring paper rolls of a roll of paper"""
+    paper_neighbors = 0
+
+    # First conditional checks for edges (out-of-bounds)
+    # cardinals
+    if (col - 1) >= 0:
+        if grid[row][col - 1] == '@':
+            paper_neighbors += 1
+    if (col + 1) < len(grid[0]):
+        if grid[row][col + 1] == '@':
+            paper_neighbors += 1
+    if (row - 1) >= 0:
+        if grid[row - 1][col] == '@':
+            paper_neighbors += 1
+    if (row + 1) < len(grid):
+        if grid[row + 1][col] == '@':
+            paper_neighbors += 1
+
+    # diagonals
+    if (row - 1) >= 0 and (col - 1) >= 0:
+        if grid[row - 1][col - 1] == '@':
+            paper_neighbors += 1
+    if (row - 1) >= 0 and (col + 1) < len(grid[0]):
+        if grid[row - 1][col + 1] == '@':
+            paper_neighbors += 1
+    if (row + 1) < len(grid) and (col - 1) >= 0:
+        if grid[row + 1][col - 1] == '@':
+            paper_neighbors += 1
+    if (row + 1) < len(grid) and (col + 1) < len(grid[0]):
+        if grid[row + 1][col + 1] == '@':
+            paper_neighbors += 1
+
+    return paper_neighbors
 
     # Node connections:
     # For Node `n` at position (1,1) (2nd list, 2nd item in the list)
@@ -31,13 +63,16 @@ def paper_access(position):
     # Check each position relative to the node to see if they contain an `@` symbol
     # if total number of `@` < 4, the roll can be accessed --> `count += 1`
 
+
 def main():
     grid = []
-    with open('test_input.txt', 'r', encoding='utf-8') as f:
+    with open('input.txt', 'r', encoding='utf-8') as f:
         for line in f:
             grid.append(list(line.strip()))
+    #print(grid)
     #print(len(grid[1]))
-    find_position(grid)
+    rolls = extract_paper(grid)
+    print(rolls)
 
 
 if __name__ == "__main__":
