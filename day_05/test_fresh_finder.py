@@ -1,6 +1,7 @@
 import pytest
 from fresh_finder import find_fresh
 from fresh_finder import process_input
+from fresh_finder_p2 import find_fresh_p2
 
 def test_process_input():
     range_lst, ingred_lst = process_input("test_input.txt")
@@ -14,5 +15,13 @@ def test_find_fresh():
 
     expected_fresh_ingredients = 3
     actual_fresh_ingredients = find_fresh(ingredient_ranges, ingredients)
+
+    assert actual_fresh_ingredients == expected_fresh_ingredients
+
+def test_find_fresh_p2():
+    ingredient_ranges = [(3, 5), (10, 14), (16, 20), (12, 18), (9, 21)]
+
+    expected_fresh_ingredients = 16
+    actual_fresh_ingredients = find_fresh_p2(ingredient_ranges)
 
     assert actual_fresh_ingredients == expected_fresh_ingredients
